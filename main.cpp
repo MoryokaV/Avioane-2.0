@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -7,6 +8,7 @@ char attackTable[11][11];
 
 struct nod {
     int x, y;
+    char symbol;
     nod* leg;
 };
 
@@ -15,11 +17,11 @@ bool isInside(int x, int y) {
 }
 
 bool isEmptyCell(int x, int y){
-    return planesTable[x][y] == '_';
-} 
+    return (planesTable[y][x] == '_');
+}
 
 void pushBlock(int x, int y, nod* a) {
-    if(!isInside(x, y) && !isEmptyCell(x, y)){
+    if(!isInside(x, y) || !isEmptyCell(x, y)){
         return;
     }
 
@@ -27,6 +29,7 @@ void pushBlock(int x, int y, nod* a) {
 
     block -> x = x;
     block -> y = y;
+    block -> symbol = '|';
     block -> leg = NULL;
 
     if(a == NULL){
@@ -54,14 +57,75 @@ void buildNorth(int x, int y, nod* a) {
     pushBlock(x + 1, y + 3, a);
 }
 
-nod* buildPlane(int x, int y) {
+void buildSouth(int x, int y, nod* a) {
+    pushBlock(x, y - 1, a);
+    pushBlock(x - 1, y - 1, a);
+    pushBlock(x - 2, y - 1, a);
+    pushBlock(x + 1, y - 1, a);
+    pushBlock(x + 2, y - 1, a);
+    pushBlock(x, y - 2, a);
+    pushBlock(x, y - 3, a);
+    pushBlock(x - 1, y - 3, a);
+    pushBlock(x + 1, y - 3, a);
+}
+
+void buildEast(int x, int y, nod* a) {
+    pushBlock(x - 1, y, a);
+    pushBlock(x - 2, y, a);
+    pushBlock(x - 2, y + 1, a);
+    pushBlock(x - 2, y + 2, a);
+    pushBlock(x - 2, y - 1, a);
+    pushBlock(x - 2, y - 2, a);
+    pushBlock(x - 3, y, a);
+    pushBlock(x - 4, y, a);
+    pushBlock(x - 4, y - 1, a);
+    pushBlock(x - 4, y + 1, a);
+}
+
+void buildWest(int x, int y, nod* a) {
+    pushBlock(x + 1, y, a);
+    pushBlock(x + 2, y, a);
+    pushBlock(x + 2, y + 1, a);
+    pushBlock(x + 2, y + 2, a);
+    pushBlock(x + 2, y - 1, a);
+    pushBlock(x + 2, y - 2, a);
+    pushBlock(x + 3, y, a);
+    pushBlock(x + 4, y, a);
+    pushBlock(x + 4, y - 1, a);
+    pushBlock(x + 4, y + 1, a);
+}
+
+nod* buildPlane(int x, int y, char orient) {
+    if(!isInside(x, y) || !isEmptyCell(x, y)){
+        return NULL;
+    }
+
     nod* a = new nod;
 
     a -> x = x;
     a -> y = y;
-    a -> leg = NULL; 
+    a -> leg = NULL;
 
-    buildNorth(x, y, a);
+    switch(orient) {
+        case 'N':
+            a -> symbol = 'k';
+            buildNorth(x, y, a);
+            break;
+        case 'S':
+            a -> symbol = 'j';
+            buildSouth(x, y, a);
+            break;
+        case 'E':
+            a -> symbol = 'l';
+            buildEast(x, y, a);
+            break;
+        case 'V':
+            a -> symbol = 'h';
+            buildWest(x, y, a);
+            break;
+        default:
+            return NULL;
+    }
 
     nod* temp = a;
     int nodes = 0;
@@ -70,7 +134,7 @@ nod* buildPlane(int x, int y) {
         nodes++;
         temp = temp -> leg;
     }
-    
+
     if(nodes < 10){
         return NULL;
     }
@@ -80,7 +144,7 @@ nod* buildPlane(int x, int y) {
 
 void appendPlane(nod* a) {
     while(a){
-        planesTable[a -> y][a -> x] = '|';
+        planesTable[a -> y][a -> x] = a -> symbol;
         a = a -> leg;
     }
 }
@@ -94,36 +158,82 @@ void clearTable(char table[][11]) {
 }
 
 void displayTable(char table[][11]) {
+    cout<<"\n";
+
+    cout<<"   ";
     for(int i = 1; i <= 10; i++){
+        cout<<i<<" ";
+    }
+
+    cout<<endl;
+    for(int i = 1; i <= 10; i++){
+        if(i == 10){
+            cout<<i<<" ";
+        }else{
+            cout<<i<<"  ";
+        }
+
         for(int j = 1; j <= 10; j++){
-            cout<<table[i][j];
+             switch(table[i][j]) {
+                case 'k':
+                    cout<<"▲";
+                    break;
+                case 'j':
+                    cout<<"▼";
+                    break;
+                case 'l':
+                    cout<<"▶";
+                    break;
+                case 'h':
+                    cout<<"◀";
+                    break;
+                case '|':
+                    cout<<"▮";
+                    break;
+                default:
+                    cout<<table[i][j];
+            }
+            cout<<" ";
         }
         cout<<endl;
     }
+
+    cout<<"\n";
+}
+
+void initCMD() {
+    #ifdef _WIN32
+        system("@chcp 65001>nul");
+    #endif
 }
 
 int main() {
+    initCMD();
+
     nod* avioane[3];
 
     clearTable(planesTable);
     clearTable(attackTable);
 
-    for(int i = 0; i < 1; i++){
+    displayTable(planesTable);
+    for(int i = 0; i < 3; i++){
         int x, y;
+        char orient;
 
-        cout<<"Avion "<<i + 1<<" (x, y): ";
-        cin>>x>>y;
+        cout<<"Avion "<<i + 1<<" (x, y, N/S/E/V): ";
+        cin>>x>>y>>orient;
 
-        avioane[i] = buildPlane(x, y);
+        avioane[i] = buildPlane(x, y, orient);
 
         if(avioane[i] == NULL) {
             cout<<"Valorile introduse sunt invalide!"<<endl;
             i--;
+        }else {
+            appendPlane(avioane[i]);
+            displayTable(planesTable);
         }
     }
 
-    appendPlane(avioane[0]);
-    displayTable(planesTable);
 
     return 0;
 }
