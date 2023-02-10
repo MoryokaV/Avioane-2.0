@@ -2,6 +2,9 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <iomanip>
+#include <ctime>
+#include <bits/stdc++.h>
+#include <stdio.h>
 
 using namespace std;
 
@@ -266,7 +269,7 @@ bool isHead(int x, int y, nod* list[], char table[][11]){
    for(int i = 0; i < 3; i++){
         if(list[i] -> x == x && list[i] -> y == y){
             nod* plane = list[i] -> leg;
-            
+
             while(plane){
                 table[plane -> y][plane -> x] = '*';
                 plane = plane -> leg;
@@ -274,7 +277,7 @@ bool isHead(int x, int y, nod* list[], char table[][11]){
 
             return true;
         }
-    } 
+    }
 
     return false;
 }
@@ -388,6 +391,68 @@ void play() {
     attack(avioane, pc);
 }
 
+void help();
+
+int teme(){
+    char opt;
+    do{
+        system("CLS");
+        cout<<"\n\n\n\n\n";
+        cout<<setw(87)<<"##########################"<<'\n';
+        cout<<setw(87)<<"#                        #"<<'\n';
+        cout<<setw(87)<<"#       Alege tema       #"<<'\n';
+        cout<<setw(87)<<"#                        #"<<'\n';
+        cout<<setw(87)<<"#   [1] Hacker           #"<<'\n';
+        cout<<setw(87)<<"#   [2] Light Raven      #"<<'\n';
+        cout<<setw(87)<<"#   [3] Minioni          #"<<'\n';
+        cout<<setw(87)<<"#   [4] Dark Raven       #"<<'\n';
+        cout<<setw(87)<<"#   [5] Dracula          #"<<'\n';
+        cout<<setw(87)<<"#   [0] Inapoi la meniu  #"<<'\n';
+        cout<<setw(87)<<"#                        #"<<'\n';
+        cout<<setw(87)<<"##########################"<<'\n';
+
+        opt = getch();
+
+        switch(opt){
+            case '1':
+                system("color 0A");
+                break;
+            case '2':
+                system("color 7D");
+                break;
+            case '3':
+                system("color 69");
+                break;
+            case '4':
+                system("color 0D");
+                break;
+            case '5':
+                system("color 8C");
+                break;
+            default:
+                break;
+        }
+
+    }while(opt != '0');
+}
+
+/*0 = Black       8 = Gray
+    1 = Blue        9 = Light Blue
+    2 = Green       A = Light Green
+    3 = Aqua        B = Light Aqua
+    4 = Red         C = Light Red
+    5 = Purple      D = Light Purple
+    6 = Yellow      E = Light Yellow
+    7 = White       F = Bright White
+*/
+
+void cumsejoaca(){
+    system("CLS");
+    cout<<"Jocul avioanele se joacă în doi jucători."<<'\n'<<'\n';
+    cout<<"Fiecare jucător are nevoie de o foaie de hârtie de matematică, pe care adversarul nu o poate vedea pe tot parcursul jocului."<<'\n'<<'\n';
+    cout<<"Pe foaie, fiecare jucător va face trasa câte un pătrat format din 10×10 pătrățele. Latura verticală a pătratului se notează cu cifre de la 1 la 10, cea orizonatala cu litere de la A la J. \nÎn interior, jucătorii vor desena câte 3 avioane astfel: vârful avionului (1 pătrățel), aripile avionului (în total 5 pătrățele), corpul (1 pătrățel) și o coadă (3 pătrățele)."<<'\n'<<'\n';
+    cout<<"Jucătorii vor trebui să identifce modul în care adversarul a  desenat avioanele. Pentru acest lucru este nevoie să noteze fiecare pe foaia sa și punctele lovite ori ratate ale celuilalt. \nPe rând, fiecare jucător încearcă să ghicească indicând coordonatele (unul de pe verticală, unul pe orizontală). \nVa primi răspunsul de la celălalt jucător, în funcție de punctul atins al avionului sau acesta va preciza că nu a fost lovit avionul, atunci când este cazul. \nAtunci când este nimerit capul avionului, răspunsul va fi „Cap lovit!”. Jocul continuă până când unul dintre copii reușește să identifice poziția celor trei avioane ale adversarului."<<'\n';
+}
 
 void menu() {
     char opt;
@@ -414,9 +479,13 @@ void menu() {
         switch(opt){
             case '1':
                 play();
+                break;
             case '2':
+                cumsejoaca();
+                sleep();
                 break;
             case '3':
+                teme();
                 break;
             default:
                 break;
@@ -424,7 +493,6 @@ void menu() {
 
     }while(opt != '0');
 }
-
 
 int main() {
     initCMD();
