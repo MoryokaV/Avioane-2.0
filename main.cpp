@@ -5,12 +5,16 @@
 #include <ctime>
 #include <bits/stdc++.h>
 #include <stdio.h>
+#include <fstream>
+#include <cstring>
 
 using namespace std;
 
 char planesTable[11][11];
 char attackTable[11][11];
 char pcTable[11][11];
+
+char ctema[100];
 
 struct nod {
     int x, y;
@@ -391,7 +395,8 @@ void play() {
     attack(avioane, pc);
 }
 
-void help();
+ifstream fin("tema.txt");
+//ofstream f("tema.txt");
 
 int teme(){
     char opt;
@@ -415,23 +420,27 @@ int teme(){
 
         switch(opt){
             case '1':
-                system("color 0A");
+                strcpy(ctema,"color 0A");
                 break;
             case '2':
-                system("color 7D");
+                strcpy(ctema,"color 7D");
                 break;
             case '3':
-                system("color 69");
+                strcpy(ctema,"color 69");
                 break;
             case '4':
-                system("color 0D");
+                strcpy(ctema,"color 0D");
                 break;
             case '5':
-                system("color 8C");
+                strcpy(ctema,"color 8C");
                 break;
             default:
                 break;
         }
+    fin.close();
+    ofstream fout("tema.txt");
+    fout<<ctema<<endl;
+    system(ctema);
 
     }while(opt != '0');
 }
@@ -455,8 +464,10 @@ void cumsejoaca(){
 }
 
 void menu() {
-    char opt;
 
+    char opt;
+    fin.get(ctema,100);
+    system(ctema);
     do{
         system("CLS");
 
