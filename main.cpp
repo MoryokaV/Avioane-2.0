@@ -403,18 +403,18 @@ int teme(){
     do{
         system("CLS");
         cout<<"\n\n\n\n\n";
-        cout<<setw(87)<<"##########################"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"#       Alege tema       #"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"#   [1] Hacker           #"<<'\n';
-        cout<<setw(87)<<"#   [2] Light Raven      #"<<'\n';
-        cout<<setw(87)<<"#   [3] Minioni          #"<<'\n';
-        cout<<setw(87)<<"#   [4] Dark Raven       #"<<'\n';
-        cout<<setw(87)<<"#   [5] Dracula          #"<<'\n';
-        cout<<setw(87)<<"#   [0] Inapoi la meniu  #"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"##########################"<<'\n';
+        cout<<setw(110)<<"##########################"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"#       Alege tema       #"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"#   [1] Hacker           #"<<'\n';
+        cout<<setw(110)<<"#   [2] Light Raven      #"<<'\n';
+        cout<<setw(110)<<"#   [3] Minioni          #"<<'\n';
+        cout<<setw(110)<<"#   [4] Dark Raven       #"<<'\n';
+        cout<<setw(110)<<"#   [5] Dracula          #"<<'\n';
+        cout<<setw(110)<<"#   [0] Inapoi la meniu  #"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"##########################"<<'\n';
 
         opt = getch();
 
@@ -472,18 +472,18 @@ void menu() {
         system("CLS");
 
         cout<<"\n\n\n\n\n";
-        cout<<setw(87)<<"##########################"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"#        AVIOANE 2.0     #"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"#          MENIU         #"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"#   [1] Player vs PC     #"<<'\n';
-        cout<<setw(87)<<"#   [2] Cum se joaca?    #"<<'\n';
-        cout<<setw(87)<<"#   [3] Teme de culori   #"<<'\n';
-        cout<<setw(87)<<"#   [0] Iesire           #"<<'\n';
-        cout<<setw(87)<<"#                        #"<<'\n';
-        cout<<setw(87)<<"##########################"<<'\n';
+        cout<<setw(110)<<"##########################"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"#        AVIOANE 2.0     #"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"#          MENIU         #"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"#   [1] Player vs PC     #"<<'\n';
+        cout<<setw(110)<<"#   [2] Cum se joaca?    #"<<'\n';
+        cout<<setw(110)<<"#   [3] Teme de culori   #"<<'\n';
+        cout<<setw(110)<<"#   [0] Iesire           #"<<'\n';
+        cout<<setw(110)<<"#                        #"<<'\n';
+        cout<<setw(110)<<"##########################"<<'\n';
 
         opt = getch();
 
